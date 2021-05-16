@@ -1,0 +1,19 @@
+.contFilterPost {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.divSearchFilterPost {
+    margin: 20px auto;
+    margin-bottom: 10px;
+}
+
+.spanSearchFilterPost {
+    font-size: 30px;
+}
+
+.divSearchFormFilterPost {
+    margin: 10px auto;
+    margin-bottom: 20px;
+}

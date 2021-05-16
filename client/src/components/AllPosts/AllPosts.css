@@ -1,0 +1,41 @@
+.contAllPosts {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.spanListAllPosts {
+    font-size: 30px;    
+}
+
+.divListAllPosts {
+    margin: 20px 32px;
+}
+
+.divAllPosts {
+    margin-left: 20px;
+}
+
+.divMapAllPosts {
+    background: rgb(241, 241, 241);
+    margin: 10px auto;
+    padding: 15px 20px;
+    border-radius: 20px;
+    width: 500px;
+}
+
+.divMapDescAllPosts {
+    display: flex;
+}
+
+.divMapButtonAllPosts {
+    color: white;
+    background: rgb(230, 101, 78);
+    position: absolute;
+    margin-left: 485px;
+    margin-top: -50px;
+    border-radius: 10px;
+    border: none;
+    padding: 3px 7px;
+}
+

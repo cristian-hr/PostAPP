@@ -16,4 +16,25 @@ server.get("/", async (req, res) => {
     }
 });
 
+server.get("/:name", async (req, res) => {
+
+    const { name } = req.params
+
+    try {
+
+        const allPosts = await Posts.findAll({
+            where: {
+                name
+            }
+        });
+
+        res.json(allPosts)
+
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ message: error.message, status: 500 });
+    }
+});
+
 module.exports = server;

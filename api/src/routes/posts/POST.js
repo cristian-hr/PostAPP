@@ -5,8 +5,6 @@ server.post("/", async (req, res) => {
 
     const { name, description } = req.body
 
-    console.log(name, description)
-
     try {
 
         const newPost = await Posts.create({            
