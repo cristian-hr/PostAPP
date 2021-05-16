@@ -20,8 +20,8 @@
 .divMapAllPosts {
     background: rgb(241, 241, 241);
     margin: 10px auto;
-    padding: 15px 20px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 15px;
     width: 500px;
 }
 
@@ -33,10 +33,13 @@
     color: white;
     background: rgb(230, 101, 78);
     position: absolute;
-    margin-left: 485px;
-    margin-top: -50px;
+    margin-left: 461px;
+    margin-top: -3px;
     border-radius: 10px;
     border: none;
     padding: 3px 7px;
+    transition: 0.2s;
 }
-
+.divMapButtonAllPosts:hover {
+    background: rgb(240, 134, 116); 
+}

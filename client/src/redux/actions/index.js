@@ -67,23 +67,21 @@ export const deletePost = (postId) => (
 
         try {
 
-            const resp = await axios.delete("http://localhost:3002/post", {data: {id:postId}})
+            const resp = await axios.delete("http://localhost:3002/post", {data: {id:postId}})             
 
             dispatch({
                 type: TYPES.DELETE_POST,
                 payload: resp.data
             });
 
+            //dispatch para borrar el post en el estado de redux de SearchPost
             dispatch({
                 type: TYPES.DELETE_SEARCH_POST,
                 payload: postId
             })
 
-            dispatch(getAllPosts())
-
-            alert(`Post from ${resp.data.name} with description ${resp.data.description} was deleted`)
+            dispatch(getAllPosts()) 
             
-
         } 
         catch (error) {
             console.log(error)

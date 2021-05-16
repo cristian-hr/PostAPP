@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, deletePost, emptyDeletedPost } from "../../redux/actions/index"
+import { deletePost, emptyDeletedPost } from "../../redux/actions/index"
 import "./AllPosts.css"
 
 function AllPosts() {
@@ -8,10 +8,14 @@ function AllPosts() {
     const dispatch = useDispatch()
     const allPosts = useSelector((store) => store.allPosts)
     const deletedPost = useSelector((store) => store.deletedPost)
-
-    useEffect(() => {
-        dispatch(getAllPosts())
-    }, [dispatch])    
+    const deleteStatus = useSelector((store) => store.deleteStatus)
+    
+    useEffect(()=>{
+        if(deleteStatus) {
+            alert(`Post from ${deletedPost.name} with description ${deletedPost.description} was deleted`)
+            dispatch(emptyDeletedPost())
+        }
+    },[dispatch, deleteStatus, deletedPost])
 
     function delPost(id) {
         dispatch(deletePost(id))
@@ -26,11 +30,11 @@ function AllPosts() {
             <div className="divAllPosts">
                 {allPosts.map(post =>
                     <div key={post.id} className="divMapAllPosts">
+                        <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
                         <div>
                             <div><b>{post.name}</b></div>
                             <div className="divMapDescAllPosts">{post.description}</div>
-                        </div>
-                        <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> X </button>
+                        </div>                        
                     </div>
                 )
                 }

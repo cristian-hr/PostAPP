@@ -3,7 +3,8 @@ import * as TYPES from "../types/index"
 const initalState = {
     allPosts: [],
     searchByName: [],
-    deletedPost: []
+    deletedPost: [],
+    deleteStatus: false,
 };
 
 function rootReducer ( state = initalState, action) {
@@ -36,7 +37,8 @@ function rootReducer ( state = initalState, action) {
         case TYPES.DELETE_POST:
              return {
                 ...state,
-                deletedPost: action.payload
+                deletedPost: action.payload,
+                deleteStatus: true
             }
         
         case TYPES.RESET_SEARCH_POST:
@@ -48,7 +50,8 @@ function rootReducer ( state = initalState, action) {
         case TYPES.RESET_DELETED_POST:
             return {
                 ...state,
-                deletedPost: action.payload
+                deletedPost: action.payload,
+                deleteStatus: false,
             }
 
         default:

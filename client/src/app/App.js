@@ -4,8 +4,19 @@ import AddPost from "../components/AddPost/AddPost"
 import FilterPost from "../components/FilterPost/FilterPost"
 import AllPosts from "../components/AllPosts/AllPosts"
 import NavBar from "../components/Navbar/Navbar"
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllPosts } from "../redux/actions/index"
+
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllPosts())
+}, [dispatch])
+
   return (
     <div className="App">
       <div className="bigContApp">

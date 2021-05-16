@@ -39,6 +39,10 @@
     padding: 7px 10px;
     font-weight: 500;
     background: #4DB6AC ;
+    transition: 0.2s;
+}
+.inpSubmitFP:hover {
+    background: #6fc0b8;
 }
 
 .inpResetFP {
@@ -48,5 +52,9 @@
     border-radius: 15px;
     padding: 7px 10px;
     font-weight: 500;
-    background: #4DB6AC ;
+    background: rgb(230, 101, 78);
+    transition: 0.2s;
+}
+.inpResetFP:hover {
+    background: rgb(240, 134, 116); 
 }
