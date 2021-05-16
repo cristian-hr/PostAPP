@@ -10,30 +10,30 @@ function FilterPost() {
     const searchPosts = useSelector((store) => store.searchByName)
 
     const initialName = { name: "" }
-    const [postName, setpostName] = useState(initialName)
+    const [postName, setPostName] = useState(initialName)
 
     useEffect(() => {
-        if (!allPosts[0]) dispatch(getAllPosts())
-    }, [dispatch, allPosts])
+        dispatch(getAllPosts())
+    }, [dispatch])
 
     function handleInputChange(event) {
-        setpostName({ name: event.target.value })
+        setPostName({ name: event.target.value })
     }
 
     function handleSubmit(event) {
+        const filterPost = allPosts.filter(post => post.name.toLowerCase().includes(postName.name.toLowerCase()))
         event.preventDefault()
-        dispatch(filterPosts(postName.name))
+        dispatch(filterPosts(filterPost))
     }
 
     function reset(event) {
         event.preventDefault()
         dispatch(emptySearchPost())
+        setPostName({name: ""})
     }
 
     function delPost(id) {
-        const post = searchPosts.find(post => post.id === id)
         dispatch(deletePost(id))
-        alert(post.name + " " + post.description)
     }
 
     return (
@@ -43,9 +43,9 @@ function FilterPost() {
             </div>
             <div className="divSearchFormFilterPost">
                 <form action="">
-                    <input placeholder="Name" type="text" name="name" onChange={handleInputChange} />
-                    <input type="submit" onClick={handleSubmit} />
-                    <button onClick={reset}>Reset</button>
+                    <input className="inpSearchFP" placeholder="Name" type="text" name="name" value={postName.name} onChange={handleInputChange} />
+                    <input className="inpSubmitFP" type="submit" onClick={handleSubmit} />
+                    <button className="inpResetFP" onClick={reset}>Reset</button>
                 </form>
 
             </div>

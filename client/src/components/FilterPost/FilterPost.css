@@ -7,6 +7,7 @@
 .divSearchFilterPost {
     margin: 20px auto;
     margin-bottom: 10px;
+    color: rgb(90, 90, 90);
 }
 
 .spanSearchFilterPost {
@@ -16,4 +17,36 @@
 .divSearchFormFilterPost {
     margin: 10px auto;
     margin-bottom: 20px;
+}
+
+.inpSearchFP {
+    margin: 10px;
+    border: none;
+    background: rgb(238, 238, 238);
+    padding: 7px 10px;
+    border-radius: 15px;
+}
+.inpSearchFP:focus {    
+    outline: none;
+}
+
+.inpSubmitFP {
+    margin: 10px;
+    border: none;
+    color: white;
+    background: rgb(240, 240, 240);
+    border-radius: 15px;
+    padding: 7px 10px;
+    font-weight: 500;
+    background: #4DB6AC ;
+}
+
+.inpResetFP {
+    border: none;
+    color: white;
+    background: rgb(240, 240, 240);
+    border-radius: 15px;
+    padding: 7px 10px;
+    font-weight: 500;
+    background: #4DB6AC ;
 }

@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, deletePost } from "../../redux/actions/index"
+import { getAllPosts, deletePost, emptyDeletedPost } from "../../redux/actions/index"
 import "./AllPosts.css"
 
 function AllPosts() {
 
     const dispatch = useDispatch()
     const allPosts = useSelector((store) => store.allPosts)
+    const deletedPost = useSelector((store) => store.deletedPost)
 
     useEffect(() => {
-        if (!allPosts[0]) dispatch(getAllPosts())
-    }, [dispatch, allPosts])
+        dispatch(getAllPosts())
+    }, [dispatch])    
 
     function delPost(id) {
-        const post = allPosts.find(post => post.id === id)
         dispatch(deletePost(id))
-        alert(post.name + " " + post.description)
+        
     }
 
     return (
@@ -30,7 +30,6 @@ function AllPosts() {
                             <div><b>{post.name}</b></div>
                             <div className="divMapDescAllPosts">{post.description}</div>
                         </div>
-                        
                         <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> X </button>
                     </div>
                 )

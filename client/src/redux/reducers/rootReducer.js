@@ -45,6 +45,12 @@ function rootReducer ( state = initalState, action) {
                 searchByName: action.payload
             }
 
+        case TYPES.RESET_DELETED_POST:
+            return {
+                ...state,
+                deletedPost: action.payload
+            }
+
         default:
             return state;      
     }

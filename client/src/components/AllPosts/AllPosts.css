@@ -5,11 +5,12 @@
 }
 
 .spanListAllPosts {
-    font-size: 30px;    
+    font-size: 30px; 
+    color: rgb(90, 90, 90);   
 }
 
 .divListAllPosts {
-    margin: 20px 32px;
+    margin: 20px auto;
 }
 
 .divAllPosts {

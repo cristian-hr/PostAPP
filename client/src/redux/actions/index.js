@@ -21,17 +21,17 @@ export const getAllPosts = () => (
     }
 )
 
-export const filterPosts = (name) => (    
+export const filterPosts = (posts) => (    
 
     async (dispatch) => {
 
         try {
 
-            const resp = await axios.get(`http://localhost:3002/post/${name}`)
+            // const resp = await axios.get(`http://localhost:3002/post/${name}`)
 
             dispatch({
                 type: TYPES.SEARCH_POST,
-                payload: resp.data
+                payload: posts
             })
 
         } 
@@ -67,11 +67,11 @@ export const deletePost = (postId) => (
 
         try {
 
-            const respDelete = await axios.delete("http://localhost:3002/post", {data: {id:postId}})
+            const resp = await axios.delete("http://localhost:3002/post", {data: {id:postId}})
 
             dispatch({
                 type: TYPES.DELETE_POST,
-                payload: respDelete.data
+                payload: resp.data
             });
 
             dispatch({
@@ -80,6 +80,8 @@ export const deletePost = (postId) => (
             })
 
             dispatch(getAllPosts())
+
+            alert(`Post from ${resp.data.name} with description ${resp.data.description} was deleted`)
             
 
         } 
@@ -97,6 +99,24 @@ export const emptySearchPost = () => (
 
             dispatch({
                 type: TYPES.RESET_SEARCH_POST,
+                payload: []
+            })
+
+        } 
+        catch (error) {
+            console.log(error)
+        }
+    }
+)
+
+export const emptyDeletedPost = () => (
+
+    async (dispatch) => {
+
+        try {
+
+            dispatch({
+                type: TYPES.RESET_DELETED_POST,
                 payload: []
             })
 
