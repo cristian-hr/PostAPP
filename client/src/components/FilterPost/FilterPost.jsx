@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterPosts, emptySearchPost, deletePost, emptyDeletedPost } from "../../redux/actions/index"
 import "./FilterPost.css"
@@ -14,12 +14,12 @@ function FilterPost() {
     const initialName = { name: "" }
     const [postName, setPostName] = useState(initialName)
 
-    useEffect(()=>{
-        if(deleteStatus) {
+    useEffect(() => {
+        if (deleteStatus) {
             alert(`Post from ${deletedPost.name} with description ${deletedPost.description} was deleted`)
             dispatch(emptyDeletedPost())
         }
-    },[dispatch, deleteStatus, deletedPost])
+    }, [dispatch, deleteStatus, deletedPost])
 
     function handleInputChange(event) {
         setPostName({ name: event.target.value })
@@ -34,7 +34,7 @@ function FilterPost() {
     function reset(event) {
         event.preventDefault()
         dispatch(emptySearchPost())
-        setPostName({name: ""})
+        setPostName({ name: "" })
     }
 
     function delPost(id) {
@@ -56,15 +56,14 @@ function FilterPost() {
             </div>
             <div>
                 {searchPosts.map(post =>
-                        <div key={post.id} className="divMapAllPosts">
+                    <div key={post.id} className="divMapAllPosts">
+                        <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
                         <div>
                             <div><b>{post.name}</b></div>
                             <div className="divMapDescAllPosts">{post.description}</div>
                         </div>
-                        
-                        <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
                     </div>
-                    )
+                )
                 }
             </div>
         </div>

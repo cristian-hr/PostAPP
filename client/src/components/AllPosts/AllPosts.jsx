@@ -9,17 +9,17 @@ function AllPosts() {
     const allPosts = useSelector((store) => store.allPosts)
     const deletedPost = useSelector((store) => store.deletedPost)
     const deleteStatus = useSelector((store) => store.deleteStatus)
-    
-    useEffect(()=>{
-        if(deleteStatus) {
+
+    useEffect(() => {
+        if (deleteStatus) {
             alert(`Post from ${deletedPost.name} with description ${deletedPost.description} was deleted`)
             dispatch(emptyDeletedPost())
         }
-    },[dispatch, deleteStatus, deletedPost])
+    }, [dispatch, deleteStatus, deletedPost])
 
     function delPost(id) {
         dispatch(deletePost(id))
-        
+
     }
 
     return (
@@ -34,7 +34,7 @@ function AllPosts() {
                         <div>
                             <div><b>{post.name}</b></div>
                             <div className="divMapDescAllPosts">{post.description}</div>
-                        </div>                        
+                        </div>
                     </div>
                 )
                 }
