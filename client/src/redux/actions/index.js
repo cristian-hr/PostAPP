@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as TYPES from "../types/index";
+const { REACT_APP_BACK_URL } = process.env
 
 export const getAllPosts = () => (
 
@@ -7,7 +8,7 @@ export const getAllPosts = () => (
 
         try {
 
-            const resp = await axios.get("http://localhost:3002/post")
+            const resp = await axios.get(`${process.env.REACT_APP_BACK_URL}/post`)
 
             dispatch({
                 type: TYPES.GET_ALL_POSTS,
@@ -27,7 +28,7 @@ export const filterPosts = (posts) => (
 
         try {
 
-            // const resp = await axios.get(`http://localhost:3002/post/${name}`)
+            // const resp = await axios.get(`${REACT_APP_BACK_URL}/post/${name}`)
 
             dispatch({
                 type: TYPES.SEARCH_POST,
@@ -47,7 +48,7 @@ export const addPost = (post) => (
 
         try {
 
-            const resp = await axios.post("http://localhost:3002/post", post)
+            const resp = await axios.post(`${REACT_APP_BACK_URL}/post`, post)
 
             dispatch({
                 type: TYPES.ADD_POST,
@@ -67,7 +68,7 @@ export const deletePost = (postId) => (
 
         try {
 
-            const resp = await axios.delete("http://localhost:3002/post", {data: {id:postId}})             
+            const resp = await axios.delete(`${REACT_APP_BACK_URL}/post`, {data: {id:postId}})             
 
             dispatch({
                 type: TYPES.DELETE_POST,
