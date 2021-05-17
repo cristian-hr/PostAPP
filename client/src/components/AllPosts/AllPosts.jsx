@@ -40,13 +40,13 @@ function AllPosts() {
             <div className="divListAllPosts">
                 <span className="spanListAllPosts">List of posts</span>
             </div>
-            <div className="orderButtonAP">
+            {allPosts[0] && <div className="orderButtonAP">
                 {postOrder === "newest" ?
                     <input className="newestButtonAP" type="button" name="newest" value="Newest first" onClick={order} />
                     :
                     <input className="olderButtonAP" type="button" name="older" value="Older first" onClick={order} />
                 }
-            </div>
+            </div>}
             <div className="divAllPosts">
                 {allPosts.map(post =>
                     <div key={post.id} className="divMapAllPosts">

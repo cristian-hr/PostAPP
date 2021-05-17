@@ -74,13 +74,19 @@ export const deletePost = (postId) => (
                 payload: resp.data
             });
 
-            //dispatch para borrar el post en el estado de redux de SearchPost
+            //dispatch para borrar el post en el estado de redux de allPosts
+            dispatch({
+                type: TYPES.DELETE_ALL_POSTS,
+                payload: postId
+            })
+
+            //dispatch para borrar el post en el estado de redux de searchByName
             dispatch({
                 type: TYPES.DELETE_SEARCH_POST,
                 payload: postId
             })
 
-            dispatch(getAllPosts()) 
+            // dispatch(getAllPosts()) 
             
         } 
         catch (error) {
@@ -97,7 +103,6 @@ export const emptyDeletedPost = () => (
 
             dispatch({
                 type: TYPES.RESET_DELETED_POST,
-                payload: []
             })
 
         } 

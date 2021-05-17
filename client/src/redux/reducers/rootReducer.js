@@ -24,6 +24,13 @@ function rootReducer ( state = initalState, action) {
                 searchByName: action.payload
             }
         
+        case TYPES.DELETE_ALL_POSTS:
+            let newAllPosts = state.allPosts.filter(post => post.id !== action.payload)
+            return {
+                ...state,
+                allPosts : newAllPosts
+            }
+        
         case TYPES.DELETE_SEARCH_POST:
             let newSearchPosts = state.searchByName.filter(post => post.id !== action.payload)
             return {
@@ -51,7 +58,6 @@ function rootReducer ( state = initalState, action) {
         case TYPES.RESET_DELETED_POST:
             return {
                 ...state,
-                deletedPost: action.payload,
                 deleteStatus: false,
             }
         case TYPES.ORDER_POST_BY_DATE:

@@ -29,8 +29,9 @@ function FilterPost() {
     }
 
     function handleSubmit(event) {
-        const filterPost = allPosts.filter(post => post.name.toLowerCase().includes(postName.name.toLowerCase()))
         event.preventDefault()
+        const filterPost = allPosts.filter(post => post.name.toLowerCase().includes(postName.name.toLowerCase()))
+        console.log(filterPost)
         dispatch(filterPosts(filterPost))
     }
 
@@ -63,10 +64,10 @@ function FilterPost() {
                 <form action="">
                     <div className="divFormFP">
                         <div className="divSearchFP">
-                            <input className="inpSearchFP" placeholder="Name" type="text" name="name" value={postName.name} onChange={handleInputChange} />
-                            {postName.name && <button className="resetInputSearchFP"  onClick={resetInput}> X </button>}
-                        </div>
+                            <input className="inpSearchFP" placeholder="Name" type="text" name="name" value={postName.name} onChange={handleInputChange}/>
+                        </div>                        
                         <input className="inpSubmitFP" type="submit" value="Search" onClick={handleSubmit} />
+                        {postName.name && <button className="resetInputSearchFP" onClick={resetInput}> X </button>}
                     </div>
                 </form>
             </div>
