@@ -89,14 +89,14 @@ export const deletePost = (postId) => (
     }
 )
 
-export const emptySearchPost = () => (
+export const emptyDeletedPost = () => (
 
     async (dispatch) => {
 
         try {
 
             dispatch({
-                type: TYPES.RESET_SEARCH_POST,
+                type: TYPES.RESET_DELETED_POST,
                 payload: []
             })
 
@@ -107,15 +107,15 @@ export const emptySearchPost = () => (
     }
 )
 
-export const emptyDeletedPost = () => (
+export const orderByDate = (order) => (
 
     async (dispatch) => {
 
         try {
 
             dispatch({
-                type: TYPES.RESET_DELETED_POST,
-                payload: []
+                type: TYPES.ORDER_POST_BY_DATE,
+                payload: order
             })
 
         } 

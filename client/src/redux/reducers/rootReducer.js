@@ -53,6 +53,16 @@ function rootReducer ( state = initalState, action) {
                 deletedPost: action.payload,
                 deleteStatus: false,
             }
+        case TYPES.ORDER_POST_BY_DATE:
+            if (action.payload === "newest") {
+                state.allPosts.sort((a,b) => a.createdAt > b.createdAt && -1 || 1)
+                state.searchByName.sort((a,b) => a.createdAt > b.createdAt && -1 || 1)               
+            }
+            if (action.payload === "older") {                
+                state.allPosts.sort((a,b) => b.createdAt > a.createdAt && -1 || 1)
+                state.searchByName.sort((a,b) => b.createdAt > a.createdAt && -1 || 1) 
+            }
+            return state
 
         default:
             return state;      

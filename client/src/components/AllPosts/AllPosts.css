@@ -13,16 +13,26 @@
     margin: 20px auto;
 }
 
-.divAllPosts {
-    margin-left: 20px;
-}
-
 .divMapAllPosts {
     background: rgb(241, 241, 241);
     margin: 10px auto;
     padding: 10px 20px;
+    padding-top: 20px;
     border-radius: 15px;
     width: 500px;
+}
+
+.divPostAllPost {
+    margin-top: 5px;
+}
+
+.divDateAllPost {
+    position: absolute;
+    margin-top: -22px;
+}
+
+.spanDateAllPost {    
+    font-size: 13px;
 }
 
 .divMapDescAllPosts {
@@ -33,8 +43,8 @@
     color: white;
     background: rgb(230, 101, 78);
     position: absolute;
-    margin-left: 461px;
-    margin-top: -3px;
+    margin-left: 462px;
+    margin-top: -14px;
     border-radius: 10px;
     border: none;
     padding: 3px 7px;
@@ -43,3 +53,40 @@
 .divMapButtonAllPosts:hover {
     background: rgb(240, 134, 116); 
 }
+
+.orderButtonAP {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.olderButtonAP {
+    margin-right: 20px;
+    border: none;
+    color: white;
+    background: rgb(240, 240, 240);
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-weight: 500;
+    background: #4DB6AC ;
+    transition: 0.2s;
+}
+.olderButtonAP:hover {
+    background: #6fc0b8;
+}
+
+.newestButtonAP {
+    margin-right: 30px;
+    border: none;
+    color: white;
+    background: rgb(240, 240, 240);
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-weight: 500;
+    background: #4DB6AC;
+    transition: 0.2s;
+}
+.newestButtonAP:hover {
+    background: #6fc0b8;
+}
+
+
