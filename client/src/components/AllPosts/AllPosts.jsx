@@ -13,6 +13,9 @@ function AllPosts() {
     const initialPostOrder = "newest"
     const [postOrder, setPostOrder] = useState(initialPostOrder)
 
+    const newest = "newest"
+    const older = "older"
+
     useEffect(() => {
         if (deleteStatus) {
             alert(`Post from ${deletedPost.name} with description ${deletedPost.description} was deleted`)
@@ -25,12 +28,12 @@ function AllPosts() {
     }
 
     function order(event) {
-        if (event.target.name === "newest") {
-            setPostOrder("older")
+        if (event.target.name === newest) {
+            setPostOrder(older)
             dispatch(orderByDate(event.target.name))
         }
-        if (event.target.name === "older") {
-            setPostOrder("newest")
+        else {
+            setPostOrder(newest)
             dispatch(orderByDate(event.target.name))
         }
     }
@@ -41,10 +44,10 @@ function AllPosts() {
                 <span className="spanListAllPosts">List of posts</span>
             </div>
             {allPosts[0] && <div className="orderButtonAP">
-                {postOrder === "newest" ?
-                    <input className="newestButtonAP" type="button" name="newest" value="Newest first" onClick={order} />
+                {postOrder === newest ?
+                    <input className="newestButtonAP" type="button" name={newest} value="Newest first" onClick={order} />
                     :
-                    <input className="olderButtonAP" type="button" name="older" value="Older first" onClick={order} />
+                    <input className="olderButtonAP" type="button" name={older} value="Older first" onClick={order} />
                 }
             </div>}
             <div className="divAllPosts">

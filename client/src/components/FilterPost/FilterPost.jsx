@@ -6,16 +6,19 @@ import "./FilterPost.css"
 function FilterPost() {
 
     const dispatch = useDispatch()
-    const allPosts = useSelector((store) => store.allPosts)
-    const searchPosts = useSelector((store) => store.searchByName)
-    const deletedPost = useSelector((store) => store.deletedPost)
-    const deleteStatus = useSelector((store) => store.deleteStatus)
+    const {allPosts,
+        searchPosts,
+        deletedPost,
+        deleteStatus} = useSelector((store) => store)
 
     const initialName = { name: "" }
     const [postName, setPostName] = useState(initialName)
 
     const initialPostOrder = "newest"
     const [postOrder, setPostOrder] = useState(initialPostOrder)
+
+    const newest = "newest"
+    const older = "older"
 
     useEffect(() => {
         if (deleteStatus) {
@@ -45,12 +48,12 @@ function FilterPost() {
     }
 
     function order(event) {
-        if (event.target.name === "newest") {
-            setPostOrder("older")
+        if (event.target.name === newest) {
+            setPostOrder(older)
             dispatch(orderByDate(event.target.name))
         }
-        if (event.target.name === "older") {
-            setPostOrder("newest")
+        else {
+            setPostOrder(newest)
             dispatch(orderByDate(event.target.name))
         }
     }
@@ -72,10 +75,10 @@ function FilterPost() {
                 </form>
             </div>
             {searchPosts[0] && <div className="orderButtonAP">
-                {postOrder === "newest" ?
-                    <input className="newestButtonAP" type="button" name="newest" value="Newest first" onClick={order} />
+                {postOrder === newest ?
+                    <input className="newestButtonAP" type="button" name={newest} value="Newest first" onClick={order} />
                     :
-                    <input className="olderButtonAP" type="button" name="older" value="Older first" onClick={order} />
+                    <input className="olderButtonAP" type="button" name={older} value="Older first" onClick={order} />
                 }
             </div>}
             <div className="divAllPosts">

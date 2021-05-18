@@ -8,7 +8,7 @@ export const getAllPosts = () => (
 
         try {
 
-            const resp = await axios.get(`${process.env.REACT_APP_BACK_URL}/post`)
+            const resp = await axios.get(`${REACT_APP_BACK_URL}/post`)
 
             dispatch({
                 type: TYPES.GET_ALL_POSTS,
@@ -27,8 +27,6 @@ export const filterPosts = (posts) => (
     async (dispatch) => {
 
         try {
-
-            // const resp = await axios.get(`${REACT_APP_BACK_URL}/post/${name}`)
 
             dispatch({
                 type: TYPES.SEARCH_POST,
@@ -86,8 +84,6 @@ export const deletePost = (postId) => (
                 type: TYPES.DELETE_SEARCH_POST,
                 payload: postId
             })
-
-            // dispatch(getAllPosts()) 
             
         } 
         catch (error) {
