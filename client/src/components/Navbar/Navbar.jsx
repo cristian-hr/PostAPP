@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link, Outlet } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 import "./Navbar.css"
 
-function NavBar () {
+function NavBar() {
 
     const location = useLocation()
 
@@ -28,15 +29,20 @@ function NavBar () {
 
     return (
         <div className="divNavBar">
-            <Link className="linkPostNavBar" to="/">
-                <span className={classPost}>Posts</span>
-            </Link>
-            <Link className="linkAddNavBar" to="/searchpost">
-                <span className={classSearch}>Search post</span>
-            </Link>
-            <Link className="linkAddNavBar" to="/addpost">
-                <span className={classAdd}>Add New Post</span>
-            </Link>
+            <div style={{ gap: '10px', display: 'flex', justifyContent: 'center' }}>
+                <Link className="linkPostNavBar" to="/">
+                    <span className={classPost}>Posts</span>
+                </Link>
+                <Link className="linkAddNavBar" to="/searchpost">
+                    <span className={classSearch}>Search post</span>
+                </Link>
+                <Link className="linkAddNavBar" to="/addpost">
+                    <span className={classAdd}>Add New Post</span>
+                </Link>
+            </div>
+            <div>
+                <Outlet />
+            </div>
         </div>
     )
 }
