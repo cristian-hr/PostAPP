@@ -2,16 +2,29 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, DB_SSL } = process.env;
+
+// DB_HOST debe ser solo el host (ej: ep-xxx.us-east-2.aws.neon.tech), sin /postapp ni ?sslmode=require
+const host = DB_HOST ? DB_HOST.split('/')[0].split('?')[0] : DB_HOST;
 
 const config = {
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
-  host: DB_HOST,
+  host,
+  port: DB_PORT || 5432,
   dialect: 'postgres',
   logging: false,
   native: false,
+  dialectOptions:
+    DB_SSL === 'false'
+      ? {}
+      : {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        },
 }
 
 const sequelize = new Sequelize(config.database,config.username, config.password, config);
