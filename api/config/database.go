@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -13,8 +12,6 @@ var DB *gorm.DB
 
 func ConnectDB() {
 	dsn := os.Getenv("DB_DSN")
-
-	fmt.Println("DSN:", dsn)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
