@@ -29,6 +29,7 @@ func main() {
 
 	r := gin.New()
 
+	r.Use(middleware.CORS())
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.Use(middleware.ErrorHandler())
@@ -37,6 +38,11 @@ func main() {
 	r.GET("/posts/:name", postHandler.GetPostsByName)
 	r.POST("/posts", postHandler.CreatePost)
 	r.DELETE("/posts/:id", postHandler.DeletePost)
+
+	// Alias para el frontend que llama a /post
+	r.GET("/post", postHandler.GetPosts)
+	r.POST("/post", postHandler.CreatePost)
+	r.DELETE("/post", postHandler.DeletePost)
 
 	port := os.Getenv("PORT")
 	if port == "" {

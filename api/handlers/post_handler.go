@@ -56,14 +56,26 @@ func (h *PostHandler) CreatePost(c *gin.Context) {
 }
 
 func (h *PostHandler) DeletePost(c *gin.Context) {
-	idParam := c.Param("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
-		return
+	var id uint
+	if idParam := c.Param("id"); idParam != "" {
+		idInt, err := strconv.Atoi(idParam)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
+			return
+		}
+		id = uint(idInt)
+	} else {
+		var body struct {
+			ID uint `json:"id"`
+		}
+		if err := c.ShouldBindJSON(&body); err != nil || body.ID == 0 {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido o faltante"})
+			return
+		}
+		id = body.ID
 	}
 
-	if err := h.service.Delete(uint(id)); err != nil {
+	if err := h.service.Delete(id); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
