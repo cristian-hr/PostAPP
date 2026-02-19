@@ -7,9 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CORS permite peticiones desde el frontend (p. ej. Vercel).
-// Configura CORS_ORIGIN en Render: https://post-app-orpin.vercel.app
-// Varios orígenes separados por coma: https://app.vercel.app,http://localhost:3000
 func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origins := os.Getenv("CORS_ORIGIN")
