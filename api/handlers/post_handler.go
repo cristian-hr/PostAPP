@@ -75,10 +75,11 @@ func (h *PostHandler) DeletePost(c *gin.Context) {
 		id = body.ID
 	}
 
-	if err := h.service.Delete(id); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	deleted, err := h.service.Delete(id)
+	if err != nil {
+		c.Error(err)
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Post eliminado"})
+	c.JSON(http.StatusOK, gin.H{"message": "Post eliminado", "deleted": deleted})
 }

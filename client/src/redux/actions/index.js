@@ -84,7 +84,7 @@ export const deletePost = (postId) => (
 
             dispatch({
                 type: TYPES.DELETE_POST,
-                payload: resp.data
+                payload: resp.data?.deleted || null
             });
 
             //dispatch para borrar el post en el estado de redux de allPosts

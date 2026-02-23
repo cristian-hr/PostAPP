@@ -15,7 +15,7 @@ type PostService interface {
 	GetAll() ([]models.Post, error)
 	GetByName(name string) ([]models.Post, error)
 	Create(post *models.Post) error
-	Delete(id uint) error
+	Delete(id uint) (*models.Post, error)
 }
 
 type postService struct {
@@ -82,15 +82,18 @@ func (s *postService) Create(post *models.Post) error {
 	return nil
 }
 
-func (s *postService) Delete(id uint) error {
+func (s *postService) Delete(id uint) (*models.Post, error) {
 	if id == 0 {
-		return apperrors.ErrInvalidInput
+		return nil, apperrors.ErrInvalidInput
 	}
 
-	err := s.repo.Delete(id)
+	deleted, err := s.repo.Delete(id)
 	if err != nil {
-		return apperrors.ErrInternal
+		if errors.Is(err, repository.ErrPostNotFound) {
+			return nil, apperrors.ErrNotFound
+		}
+		return nil, apperrors.ErrInternal
 	}
 
-	return nil
+	return deleted, nil
 }

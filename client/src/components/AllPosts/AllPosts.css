@@ -89,4 +89,12 @@
     background: #6fc0b8;
 }
 
+.loading {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(90, 90, 90);
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: center;
+}
 

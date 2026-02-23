@@ -1,16 +1,20 @@
 package repository
 
 import (
+	"errors"
+
 	"post-app-api/models"
 
 	"gorm.io/gorm"
 )
 
+var ErrPostNotFound = errors.New("post not found")
+
 type PostRepository interface {
 	FindAll() ([]models.Post, error)
 	FindByName(name string) ([]models.Post, error)
 	Create(post *models.Post) error
-	Delete(id uint) error
+	Delete(id uint) (*models.Post, error)
 }
 
 type postRepository struct {
@@ -38,7 +42,18 @@ func (r *postRepository) Create(post *models.Post) error {
 	return result.Error
 }
 
-func (r *postRepository) Delete(id uint) error {
-	result := r.db.Delete(&models.Post{}, id)
-	return result.Error
+func (r *postRepository) Delete(id uint) (*models.Post, error) {
+	var post models.Post
+	result := r.db.First(&post, id)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, ErrPostNotFound
+		}
+		return nil, result.Error
+	}
+	result = r.db.Delete(&post)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &post, nil
 }
