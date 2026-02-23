@@ -10,6 +10,7 @@ function AllPosts() {
     const allPosts = useSelector((store) => store.allPosts)
     const deletedPost = useSelector((store) => store.deletedPost)
     const deleteStatus = useSelector((store) => store.deleteStatus)
+    const loading = useSelector((store) => store.loading)
 
     const initialPostOrder = "newest"
     const [postOrder, setPostOrder] = useState(initialPostOrder)
@@ -52,21 +53,27 @@ function AllPosts() {
                 }
             </div>}
             <div className="divAllPosts">
-                {allPosts.map(post =>
-                    <div key={post.id} className="divMapAllPosts">
-                        <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
-                        <div className="divPostAllPost">
-                            <div className="divDateAllPost">
-                                <span className="spanDateAllPost"> {post.createdAt.slice(0, 10)}</span>
+                {loading ? (
+                    <span className="loading">Loading...</span>
+                ) : (
+                    <>
+                        {allPosts.map(post =>
+                            <div key={post.id} className="divMapAllPosts">
+                                <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
+                                <div className="divPostAllPost">
+                                    <div className="divDateAllPost">
+                                        <span className="spanDateAllPost"> {post.createdAt.slice(0, 10)}</span>
+                                    </div>
+                                    <div>
+                                        <b>{post.name}</b>
+                                    </div>
+                                    <div className="divMapDescAllPosts">{post.description}</div>
+                                </div>
                             </div>
-                            <div>
-                                <b>{post.name}</b>
-                            </div>
-                            <div className="divMapDescAllPosts">{post.description}</div>
-                        </div>
-                    </div>
-                )
-                }
+                        )}
+                    </>
+                )}
+
             </div>
         </div>
     )

@@ -7,10 +7,13 @@ import "./FilterPost.css"
 function FilterPost() {
 
     const dispatch = useDispatch()
-    const {allPosts,
+    const {
+        allPosts,
         searchPosts,
         deletedPost,
-        deleteStatus} = useSelector((store) => store)
+        deleteStatus,
+        loading
+    } = useSelector((store) => store)
 
     const initialName = { name: "" }
     const [postName, setPostName] = useState(initialName)
@@ -68,8 +71,8 @@ function FilterPost() {
                 <form action="">
                     <div className="divFormFP">
                         <div className="divSearchFP">
-                            <input className="inpSearchFP" placeholder="Name" type="text" name="name" value={postName.name} onChange={handleInputChange}/>
-                        </div>                        
+                            <input className="inpSearchFP" placeholder="Name" type="text" name="name" value={postName.name} onChange={handleInputChange} />
+                        </div>
                         <input className="inpSubmitFP" type="submit" value="Search" onClick={handleSubmit} />
                         {postName.name && <button className="resetInputSearchFP" onClick={resetInput}> X </button>}
                     </div>
@@ -83,19 +86,24 @@ function FilterPost() {
                 }
             </div>}
             <div className="divAllPosts">
-                {searchPosts.map(post =>
-                    <div key={post.id} className="divMapAllPosts">
-                        <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
-                        <div>
-                            <div className="divDateAllPost">
-                                <span className="spanDateAllPost"> {post.createdAt.slice(0, 10)}</span>
+                {loading ? (
+                    <span className="loading">Loading...</span>
+                ) : (
+                    <>
+                        {searchPosts.map(post =>
+                            <div key={post.id} className="divMapAllPosts">
+                                <button className="divMapButtonAllPosts" onClick={() => delPost(post.id)}> Delete </button>
+                                <div>
+                                    <div className="divDateAllPost">
+                                        <span className="spanDateAllPost"> {post.createdAt.slice(0, 10)}</span>
+                                    </div>
+                                    <div><b>{post.name}</b></div>
+                                    <div className="divMapDescAllPosts">{post.description}</div>
+                                </div>
                             </div>
-                            <div><b>{post.name}</b></div>
-                            <div className="divMapDescAllPosts">{post.description}</div>
-                        </div>
-                    </div>
-                )
-                }
+                        )}
+                    </>
+                )}
             </div>
         </div>
     )

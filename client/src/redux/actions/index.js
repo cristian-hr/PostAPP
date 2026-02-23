@@ -2,11 +2,17 @@ import axios from "axios";
 import * as TYPES from "../types/index";
 const { REACT_APP_BACK_URL } = process.env
 
+export const setLoading = (loading) => (
+    (dispatch) => dispatch({ type: TYPES.SET_LOADING, payload: loading })
+)
+
 export const getAllPosts = () => (
 
     async (dispatch) => {
 
         try {
+
+            dispatch(setLoading(true))
 
             const resp = await axios.get(`${REACT_APP_BACK_URL}/post`)
 
@@ -15,14 +21,16 @@ export const getAllPosts = () => (
                 payload: resp.data
             })
 
-        } 
+        }
         catch (error) {
             console.log(error)
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 )
 
-export const filterPosts = (posts) => (    
+export const filterPosts = (posts) => (
 
     async (dispatch) => {
 
@@ -33,7 +41,7 @@ export const filterPosts = (posts) => (
                 payload: posts
             })
 
-        } 
+        }
         catch (error) {
             console.log(error)
         }
@@ -46,6 +54,8 @@ export const addPost = (post) => (
 
         try {
 
+            dispatch(setLoading(true))
+
             const resp = await axios.post(`${REACT_APP_BACK_URL}/post`, post)
 
             dispatch({
@@ -53,20 +63,24 @@ export const addPost = (post) => (
                 payload: resp.data
             })
 
-        } 
+        }
         catch (error) {
             console.log(error)
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 )
 
-export const deletePost = (postId) => (   
+export const deletePost = (postId) => (
 
     async (dispatch) => {
 
         try {
 
-            const resp = await axios.delete(`${REACT_APP_BACK_URL}/post`, {data: {id:postId}})             
+            dispatch(setLoading(true))
+
+            const resp = await axios.delete(`${REACT_APP_BACK_URL}/post`, { data: { id: postId } })
 
             dispatch({
                 type: TYPES.DELETE_POST,
@@ -84,10 +98,12 @@ export const deletePost = (postId) => (
                 type: TYPES.DELETE_SEARCH_POST,
                 payload: postId
             })
-            
-        } 
+
+        }
         catch (error) {
             console.log(error)
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 )
@@ -102,7 +118,7 @@ export const emptyDeletedPost = () => (
                 type: TYPES.RESET_DELETED_POST,
             })
 
-        } 
+        }
         catch (error) {
             console.log(error)
         }
@@ -120,7 +136,7 @@ export const orderByDate = (order) => (
                 payload: order
             })
 
-        } 
+        }
         catch (error) {
             console.log(error)
         }

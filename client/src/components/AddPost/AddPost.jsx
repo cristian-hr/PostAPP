@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../redux/actions/index"
 import "./AddPost.css"
 
@@ -8,6 +7,7 @@ import "./AddPost.css"
 function AddPost() {
 
     const dispatch = useDispatch()
+    const { loading } = useSelector((store) => store)
 
     const initialPost = { name: "", description: "" }
     const initialClass = { name: false, desc: false }
@@ -16,16 +16,16 @@ function AddPost() {
     const [classMissing, setclassMissing] = useState(initialClass)
 
     function handleInputChange(event) {
-        if (event.target.name === "name") setclassMissing({...classMissing, name: false})
-        if (event.target.name === "description") setclassMissing({...classMissing, desc: false})
+        if (event.target.name === "name") setclassMissing({ ...classMissing, name: false })
+        if (event.target.name === "description") setclassMissing({ ...classMissing, desc: false })
         setPost({ ...post, [event.target.name]: event.target.value })
     }
 
     function handleSubmit(event) {
         event.preventDefault()
-        if (!post.name && !post.description) setclassMissing({ name: "missingName", desc: "missingDesc"})
-        else if (!post.name) setclassMissing({...classMissing, name: "missingName"})
-        else if (!post.description) setclassMissing({...classMissing, desc: "missingDesc"})
+        if (!post.name && !post.description) setclassMissing({ name: "missingName", desc: "missingDesc" })
+        else if (!post.name) setclassMissing({ ...classMissing, name: "missingName" })
+        else if (!post.description) setclassMissing({ ...classMissing, desc: "missingDesc" })
         else {
             dispatch(addPost(post))
             setPost(initialPost)
@@ -48,10 +48,19 @@ function AddPost() {
                     <div className="descriptionAddPost">
                         <span className="spanDescAddPost">Description: </span>
                         <textarea className="nameDescAddPost" type="text" name="description" value={post.description} onChange={handleInputChange} />
-                        
+
                     </div>
-                    <input className="submitAddPost" type="submit" value="Submit" onClick={handleSubmit} />
-                    {classMissing.desc && <span className="missingDesc">Description es missing</span>}
+                    <input
+                        className="submitAddPost"
+                        type="submit"
+                        value="Submit"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                    />
+                    {loading && <span className="loading">Loading...</span>}
+                    {classMissing.desc && (
+                        <span className="missingDesc">Description es missing</span>
+                    )}
                 </form>
             </div>
         </div>

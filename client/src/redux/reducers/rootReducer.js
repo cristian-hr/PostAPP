@@ -6,11 +6,18 @@ const initalState = {
     searchPosts: [],
     deletedPost: [],
     deleteStatus: false,
+    loading: false,
 };
 
 function rootReducer(state = initalState, action) {
 
     switch (action.type) {
+
+        case TYPES.SET_LOADING:
+            return {
+                ...state,
+                loading: action.payload
+            }
 
         case TYPES.GET_ALL_POSTS:
             return {
